@@ -7,11 +7,6 @@
 
 #include <corewar.h>
 
-static bool same_string(char const *str1, char const *str2)
-{
-
-}
-
 bool str_begin_char(const char *str, char c)
 {
     for (int i = 0; str[i]; i++) {
@@ -25,7 +20,11 @@ bool str_begin_char(const char *str, char c)
     return (false);
 }
 
-int str_begin(const char *str, char const *begin)
+bool str_begin(const char *str, char const *begin)
 {
-
+    for (int i = 0; begin[i] && str[i]; i++) {
+        if (begin[i] != str[i])
+            return (false);
+    }
+    return (true);
 }

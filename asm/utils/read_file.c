@@ -5,7 +5,7 @@
 **  function
 */
 
-#include <zconf.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include <fcntl.h>
 
@@ -28,7 +28,7 @@ char *read_file(int fd, char *fp)
     fd = open_file(fp);
     buffer = malloc(sizeof(char) * (size + 1));
     read(fd, buffer, size);
-    buffer[size-1] = 0;
+    buffer[size] = 0;
     close(fd);
     return (buffer);
 }

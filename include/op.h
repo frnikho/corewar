@@ -31,17 +31,22 @@ typedef char args_type_t;
 #define T_IND 4
 #define T_LAB 8
 
-struct op_s
+typedef struct corewar_s {
+    char *content;
+    int fd_file;
+    int current_write_size;
+    int cursor;
+} corewar_t;
+
+typedef struct op_s
 {
     char *mnemonique;
     char nbr_args;
     args_type_t type[MAX_ARGS_NUMBER];
     char code;
     int nbr_cycles;
-    char *comment;
-};
-
-typedef struct op_s op_t;
+    int (*callback)(char *line, corewar_t *corewar);
+} op_t;
 
 #define IND_SIZE 2
 #define DIR_SIZE 4
@@ -54,15 +59,13 @@ extern op_t op_tab[];
 
 #define COREWAR_EXEC_MAGIC 0xea83f3
 
-struct header_s
+typedef struct header_s
 {
     int magic;
     char prog_name[PROG_NAME_LENGTH + 1];
     int prog_size;
     char comment[COMMENT_LENGTH + 1];
-};
-
-typedef struct header_s header_t;
+} header_t;
 
 #define CYCLE_TO_DIE 1536
 #define CYCLE_DELTA 5

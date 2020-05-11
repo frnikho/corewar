@@ -46,10 +46,8 @@ static char **init_split(char *c, char s)
 {
     int size = count_line(c, s) + 1;
     char **array = malloc(sizeof(char*) * (size + 1));
-    for (int i = 0; i < size; i++) {
-        printf("count: %d\n", count_character_line(c, s, i));
+    for (int i = 0; i < size; i++)
         array[i] = malloc(sizeof(char) * (count_character_line(c, s, i) + 2));
-    }
     return (array);
 }
 
