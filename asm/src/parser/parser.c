@@ -18,8 +18,9 @@ int check_instruction(corewar_t *corewar, char *line)
             continue;
         instruction = get_instruction(&line[i]);
         if (instruction.mnemonique != 0) {
-            printf("found: %s\n", instruction.mnemonique);
+            corewar->instr_begin = i;
             instruction.callback(line, corewar);
+            corewar->instr_begin = 0;
             return (0);
         }
         found = true;
@@ -36,11 +37,11 @@ int parse_line(corewar_t *corewar, char *line)
     check_instruction(corewar, line);
 }
 
-int parser(corewar_t *corewar, char *content)
+int parser(corewar_t *corewar)
 {
-    if (!content)
+    if (!corewar->content)
         return (-1);
-    char **array = str_split(content, '\n');
+    char **array = str_split(corewar->content, '\n');
     for (int i = 0; array[i]; i++)
         parse_line(corewar, array[i]);
 }

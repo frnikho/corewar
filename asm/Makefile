@@ -2,12 +2,14 @@ CC						=				gcc
 
 NAME					=				asm
 SRC						=				src/main.c								\
+										src/endian_handling.c					\
+										src/get_params_values.c					\
 										src/instruction.c						\
 										src/instruction/basic.c					\
 										src/instruction/jump.c					\
 										src/parser/parser.c						\
 										utils/read_file.c						\
-										utils/str_begin.c						\
+										utils/str_begin.c
 
 OBJ                     =       		$(SRC:%.c=%.o)
 

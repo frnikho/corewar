@@ -35,6 +35,7 @@ typedef struct corewar_s {
     char *content;
     int fd_file;
     int current_write_size;
+    int instr_begin;
     int cursor;
 } corewar_t;
 

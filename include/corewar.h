@@ -13,12 +13,14 @@
 
 #define null 0
 
-typedef enum { false, true } bool;
+typedef enum {false, true } bool;
+typedef enum {REGISTER = 1, DIRECT = 2, INDIRECT = 3} params;
 
-int parser(corewar_t *corewar, char *content);
+int parser(corewar_t *corewar);
 
 int open_file(char *content);
 char *read_file(int fd, char *fp);
+void write_little_endian(int fd, int nb, int bytes_nb);
 
 bool str_begin(const char *str, char const *begin);
 bool str_begin_char(const char *str, char c);
@@ -27,9 +29,16 @@ char **split(char *content, char c);
 
 op_t get_instruction(char *name);
 
+int get_param_value(char *param);
+
 int live(char *line, corewar_t *corewar);
 int sti(char *line, corewar_t *corewar);
 int and(char *line, corewar_t *corewar);
 int zjmp(char *line, corewar_t *corewar);
+
+params get_params(char *params);
+int get_register_number(char *line);
+char get_coding_byte(char **argv);
+int write_params(corewar_t *corewar, int nbr, params params, int is_index);
 
 #endif

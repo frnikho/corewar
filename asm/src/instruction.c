@@ -5,6 +5,7 @@
 ** instruction function
 */
 
+#include <my.h>
 #include "corewar.h"
 op_t op_tab[] =
     {
@@ -34,4 +35,68 @@ op_t get_instruction(char *name)
             return op_tab[i];
     }
     return op_tab[16];
+}
+
+params get_params(char *params)
+{
+    int nbr = 0;
+
+    for (int i = 0; params[i]; i++) {
+        if (params[i] == ' ')
+            continue;
+        if (params[i] == '%')
+            return (DIRECT);
+        if (my_str_isalpha(&params[i]))
+            return (INDIRECT);
+        return (REGISTER);
+    }
+}
+
+char get_coding_byte(char **argv)
+{
+    int length = array_length(argv);
+    char byte_code = 0;
+    params a = 0;
+    int power = 7;
+
+    for (int i = 0; argv[i]; i++) {
+        a = get_params(argv[i]);
+        if (a == INDIRECT) {
+            byte_code += my_compute_power_it(2, power);
+            byte_code += my_compute_power_it(2, power - 1);
+        }
+        if (a == DIRECT) {
+            byte_code += my_compute_power_it(2, power);
+        }
+        if (a == REGISTER) {
+            byte_code += my_compute_power_it(2, power - 1);
+        }
+        power -= 2;
+    }
+    return (byte_code);
+}
+
+int get_register_number(char *line)
+{
+    bool found = false;
+    int nbr = 0;
+    for (int i = 0; line[i]; i++) {
+        if (my_isnum(line[i])) {
+            found = true;
+        }
+        if (found) {
+            return (my_getnbr(&line[i]));
+        }
+    }
+}
+
+int write_params(corewar_t *corewar, int nbr, params params, int is_index)
+{
+    int size = 0;
+
+    if (is_index && params == DIRECT)
+        size = 2;
+    if (!is_index && params == DIRECT)
+        size = 4;
+    write_little_endian(corewar->fd_file, nbr, size);
 }

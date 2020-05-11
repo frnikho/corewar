@@ -5,6 +5,7 @@
 ** main function
 */
 
+#include <fcntl.h>
 #include "corewar.h"
 
 int main(int argc, char **argv)
@@ -18,7 +19,8 @@ int main(int argc, char **argv)
         return (84);
     corewar.fd_file = open_file(argv[1]);
     corewar.content = read_file(corewar.fd_file, argv[1]);
-    code = parser(&corewar, content);
+    corewar.fd_file = open("result.cor", O_RDWR | O_CREAT | O_TRUNC, 0666);
+    code = parser(&corewar);
     if (code == -1)
         return (84);
 }
