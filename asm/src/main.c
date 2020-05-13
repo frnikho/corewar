@@ -35,16 +35,21 @@ int main(int argc, char **argv)
     corewar.fd_file = open("result.cor", O_RDWR | O_CREAT | O_TRUNC, 0666);
     
     push_request(&corewar, 8, 12, "salut");
-    push_request(&corewar, 8, 12, "deux");
-    for (int i = 0; corewar.shift_requests[i]; i++)
-        printf("%s  %i % i\n", corewar.shift_requests[i]->name, corewar.shift_requests[i]->index, corewar.shift_requests[i]->count_from);
-    //push_cursor(&corewar, 0, "saluzzzt");
-    //push_cursor(&corewar, 19, "OOOdeux");
-    for (int i = 0; corewar.cursor_shifts[i]; i++)
-        printf("%s  %i\n", corewar.cursor_shifts[i]->name, corewar.cursor_shifts[i]->position);
-    //code = parser(&corewar);
-    //if (code == -1)
-    //    return (84);
+    push_request(&corewar, 0, 3, "quinze");
+
+    push_cursor(&corewar, 0, "saluzzzt");
+    push_cursor(&corewar, 19, "OOOdeux");
+    push_cursor(&corewar, 14, "quinze");
+
+    code = parser(&corewar);
+    if (code == -1)
+        return (84);
+    for (int i = 0; i < corewar.bytes_nb; i++)
+        write(corewar.fd_file, &corewar.bytes_tab[i], 1);
+    
+    construct_offsets(corewar.shift_requests, corewar.cursor_shifts);
+    write_offsets(corewar.shift_requests, &corewar);
+    
     //for (int i = 0; i < corewar.bytes_nb; i++)
-    //    write(corewar.fd_file, &corewar.bytes_tab[i], 1);    
+    //    write(corewar.fd_file, &corewar.bytes_tab[i], 1);
 }

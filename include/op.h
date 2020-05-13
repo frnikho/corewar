@@ -39,6 +39,7 @@ typedef struct shift_request_s
     char *name;
     int index;
     int count_from;
+    int offset;
 } shift_request_t;
 
 typedef struct cursor_shift_s

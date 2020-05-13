@@ -59,3 +59,31 @@ void push_cursor(corewar_t *corewar, int position, char *name)
     corewar->cursor_shifts = next_tab;
 }
 
+int calc_request_offset(shift_request_t *request, cursor_shift_t **cursors)
+{
+    int res = -1;
+
+    for (int i = 0; cursors[i]; i++) {
+        if (my_strcmp(request->name, cursors[i]->name) == 0) {
+            res = i;
+            break;
+        }
+    }
+    if (res == -1)
+        return (-1);
+    return (cursors[res]->position - request->count_from + 1);
+}
+
+void construct_offsets(shift_request_t **requests, cursor_shift_t **cursors)
+{
+    for (int i = 0; requests[i]; i++) {
+        requests[i]->offset = calc_request_offset(requests[i], cursors);
+    }
+}
+
+void write_offsets(shift_request_t **requests, corewar_t *corewar)
+{
+    for (int i = 0; requests[i]; i++) {
+        corewar->bytes_tab[requests[i]->index] = requests[i]->offset;
+    }
+}

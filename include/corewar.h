@@ -57,5 +57,8 @@ void add_byte_core(corewar_t *corewar, int pre_nb, int *next_tab, int *values);
 
 void push_request(corewar_t *corewar, int count_from, int index, char *name);
 void push_cursor(corewar_t *corewar, int position, char *name);
+int calc_request_offset(shift_request_t *request, cursor_shift_t **cursors);
+void construct_offsets(shift_request_t **requests, cursor_shift_t **cursors);
+void write_offsets(shift_request_t **requests, corewar_t *corewar);
 
 #endif
