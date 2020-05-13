@@ -7,12 +7,13 @@
 
 #include <my.h>
 #include "corewar.h"
+
 op_t op_tab[] =
     {
         {"live", 1, {T_DIR}, 1, 10, live},
-        {"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, 0},
-        {"add", 3, {T_REG, T_REG, T_REG}, 4, 10, 0},
-        {"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, 0},
+        {"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, ld},
+        {"add", 3, {T_REG, T_REG, T_REG}, 4, 10, add},
+        {"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, sub},
         {"and", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 6, 6, and},
         {"or", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 7, 6, 0},
         {"xor", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 8, 6, 0},
@@ -24,7 +25,7 @@ op_t op_tab[] =
         {"lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 14, 50,0},
         {"lfork", 1, {T_DIR}, 15, 1000, 0},
         {"aff", 1, {T_REG}, 16, 2, 0},
-        {"st", 2, {T_REG, T_IND | T_REG}, 3, 5, 0},
+        {"st", 2, {T_REG, T_IND | T_REG}, 3, 5, st},
         {0, 0, {0}, 0, 0, 0}
     };
 

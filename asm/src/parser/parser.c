@@ -5,6 +5,7 @@
 ** parser function
 */
 
+#include <zconf.h>
 #include "corewar.h"
 #include "my.h"
 
@@ -32,7 +33,21 @@ int parse_line(corewar_t *corewar, char *line)
     bool comment = str_begin_char(line, '#');
     bool info = str_begin_char(line, '.');
 
-    if (comment || info)
+    if (info) {
+        if (str_begin(line, ".name")) {
+            write_name(corewar, line);
+        }
+        if (str_begin(line, ".comment")) {
+            write_comment(corewar, line);
+        }
+        if (corewar->header_count == 2) {
+            write(corewar->fd_file, &corewar->header, sizeof(corewar->header));
+            corewar->header_count++;
+        }
+        return (0);
+    }
+
+    if (comment)
         return (0);
     check_instruction(corewar, line);
 }

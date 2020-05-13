@@ -22,8 +22,6 @@
 #define NAME_CMD_STRING ".name"
 #define COMMENT_CMD_STRING ".comment"
 
-#define REG_NUMBER 16
-
 typedef char args_type_t;
 
 #define T_REG 1
@@ -31,12 +29,27 @@ typedef char args_type_t;
 #define T_IND 4
 #define T_LAB 8
 
+#define PROG_NAME_LENGTH 128
+#define COMMENT_LENGTH 2048
+
+#define COREWAR_EXEC_MAGIC 0xea83f3
+
+typedef struct header_s
+{
+    int magic;
+    char prog_name[PROG_NAME_LENGTH + 1];
+    int prog_size;
+    char comment[COMMENT_LENGTH + 1];
+} header_t;
+
 typedef struct corewar_s {
     char *content;
     int fd_file;
     int current_write_size;
     int instr_begin;
     int cursor;
+    header_t header;
+    int header_count;
 } corewar_t;
 
 typedef struct op_s
@@ -54,19 +67,6 @@ typedef struct op_s
 #define REG_SIZE DIR_SIZE
 
 extern op_t op_tab[];
-
-#define PROG_NAME_LENGTH 128
-#define COMMENT_LENGTH 2048
-
-#define COREWAR_EXEC_MAGIC 0xea83f3
-
-typedef struct header_s
-{
-    int magic;
-    char prog_name[PROG_NAME_LENGTH + 1];
-    int prog_size;
-    char comment[COMMENT_LENGTH + 1];
-} header_t;
 
 #define CYCLE_TO_DIE 1536
 #define CYCLE_DELTA 5

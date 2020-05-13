@@ -1,17 +1,12 @@
 CC						=				gcc
 
-NAME					=				asm
+NAME					=				corewar
 SRC						=				src/main.c								\
-										src/endian_handling.c					\
-										src/headers.c							\
-										src/get_params_values.c					\
-										src/instruction.c						\
-										src/instruction/basic.c					\
-										src/instruction/jump.c					\
-										src/instruction/operator.c				\
-										src/parser/parser.c						\
-										utils/read_file.c						\
-										utils/str_begin.c
+										src/register.c							\
+										src/vm.c								\
+										src/loop.c								\
+										src/utils/read_file.c					\
+										src/utils/str_begin.c
 
 OBJ                     =       		$(SRC:%.c=%.o)
 

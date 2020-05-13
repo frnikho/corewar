@@ -35,10 +35,17 @@ int live(char *line, corewar_t *corewar);
 int sti(char *line, corewar_t *corewar);
 int and(char *line, corewar_t *corewar);
 int zjmp(char *line, corewar_t *corewar);
+int ld(char *line, corewar_t *corewar);
+int st(char *line, corewar_t *corewar);
+int add(char *line, corewar_t *corewar);
+int sub(char *line, corewar_t *corewar);
 
 params get_params(char *params);
 int get_register_number(char *line);
 char get_coding_byte(char **argv);
 int write_params(corewar_t *corewar, int nbr, params params, int is_index);
+
+void write_name(corewar_t *corewar, char *line);
+void write_comment(corewar_t *corewar, char *line);
 
 #endif
