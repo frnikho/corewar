@@ -50,6 +50,8 @@ typedef struct corewar_s {
     int cursor;
     header_t header;
     int header_count;
+    int *bytes_tab;
+    int bytes_nb;
 } corewar_t;
 
 typedef struct op_s

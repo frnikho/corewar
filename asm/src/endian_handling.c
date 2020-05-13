@@ -5,6 +5,7 @@
 ** endian_handling.c
 */
 
+#include "corewar.h"
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -44,7 +45,7 @@ static int calc_and_print(int nb, int fd, int *tab, int reset)
     return (bytes);
 }
 
-void write_little_endian(int fd, int nb, int bytes_nb)
+void write_little_endian(int fd, int nb, int bytes_nb, corewar_t *corewar)
 {
     int zero = 0;
     int *tab = malloc(sizeof(int) * bytes_nb);
@@ -62,8 +63,8 @@ void write_little_endian(int fd, int nb, int bytes_nb)
         bytes = get_biggest_power(nb, 256)+1;
     }
     for (int i = bytes; i < bytes_nb; i++)
-        write(fd, &zero, 1);
+        push_byte(corewar, zero);
     for (int i = 0; i < bytes; i++)
-        write(fd, &tab[i], 1);
+        push_byte(corewar, tab[i]);
     free(tab);
 }

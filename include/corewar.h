@@ -20,7 +20,7 @@ int parser(corewar_t *corewar);
 
 int open_file(char *content);
 char *read_file(int fd, char *fp);
-void write_little_endian(int fd, int nb, int bytes_nb);
+void write_little_endian(int fd, int nb, int bytes_nb, corewar_t *corewar);
 
 bool str_begin(const char *str, char const *begin);
 bool str_begin_char(const char *str, char c);
@@ -47,5 +47,12 @@ int write_params(corewar_t *corewar, int nbr, params params, int is_index);
 
 void write_name(corewar_t *corewar, char *line);
 void write_comment(corewar_t *corewar, char *line);
+
+void push_byte(corewar_t *corewar, int byte);
+void pop_byte(corewar_t *corewar);
+void del_byte(corewar_t *corewar, int index);
+void replace_byte(corewar_t *corewar, int index, int new_byte);
+void add_byte(corewar_t *corewar, int index, int byte);
+void add_byte_core(corewar_t *corewar, int pre_nb, int *next_tab, int *values);
 
 #endif

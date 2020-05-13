@@ -10,3 +10,7 @@ fclean:                 clean
 						$(MAKE) -C asm/ fclean
 						$(MAKE) -C corewar/ fclean
 re:                     fclean all
+
+debug:
+						$(MAKE) -C asm/ debug
+						$(MAKE) -C corewar/ debug

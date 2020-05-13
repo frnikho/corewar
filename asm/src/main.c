@@ -7,6 +7,10 @@
 
 #include <fcntl.h>
 #include "corewar.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include "my.h"
+#include <zconf.h>
 
 int main(int argc, char **argv)
 {
@@ -22,8 +26,13 @@ int main(int argc, char **argv)
     corewar.header_count = 0;
     corewar.header.magic = COREWAR_EXEC_MAGIC;
     corewar.header.prog_size = 23;
+    corewar.bytes_nb = 0;
+    corewar.bytes_tab = malloc(sizeof(int));
     corewar.fd_file = open("result.cor", O_RDWR | O_CREAT | O_TRUNC, 0666);
+    
     code = parser(&corewar);
     if (code == -1)
         return (84);
+    for (int i = 0; i < corewar.bytes_nb; i++)
+        write(corewar.fd_file, &corewar.bytes_tab[i], 1);    
 }
