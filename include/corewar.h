@@ -55,4 +55,7 @@ void replace_byte(corewar_t *corewar, int index, int new_byte);
 void add_byte(corewar_t *corewar, int index, int byte);
 void add_byte_core(corewar_t *corewar, int pre_nb, int *next_tab, int *values);
 
+void push_request(corewar_t *corewar, int count_from, int index, char *name);
+void push_cursor(corewar_t *corewar, int position, char *name);
+
 #endif
