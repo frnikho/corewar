@@ -28,13 +28,19 @@ int sti(char *line, corewar_t *corewar)
     char **array = str_split(&line[corewar->instr_begin] + 4, ',');
     char instruction = 11;
     char coding_byte =  get_coding_byte(array);
+    shift_request_t tmp = {NULL, 0, corewar->bytes_nb, 0};
 
     write_little_endian(corewar->fd_file, instruction, 1, corewar);
     write_little_endian(corewar->fd_file, coding_byte, 1, corewar);
 
+    if ((tmp.name = detect_shift_request(array[0])) != NULL)
+        push_request(corewar, tmp.count_from, corewar->bytes_nb, tmp.name);
     write_params(corewar, get_param_value(array[0]), get_params(array[0]), 0);
-    //TODO calcul cursor shift
-    write_params(corewar, 15, get_params(array[1]), 1);
+    if ((tmp.name = detect_shift_request(array[1])) != NULL)
+        push_request(corewar, tmp.count_from, corewar->bytes_nb, tmp.name);
+    write_params(corewar, get_param_value(array[1]), get_params(array[1]), 1);
+    if ((tmp.name = detect_shift_request(array[2])) != NULL)
+        push_request(corewar, tmp.count_from, corewar->bytes_nb, tmp.name);
     write_params(corewar, get_param_value(array[2]), get_params(array[2]), 1);
 }
 

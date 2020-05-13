@@ -30,6 +30,7 @@ char **split(char *content, char c);
 op_t get_instruction(char *name);
 
 int get_param_value(char *param);
+char *detect_shift_request(char *str);
 
 int live(char *line, corewar_t *corewar);
 int sti(char *line, corewar_t *corewar);

@@ -84,6 +84,8 @@ void construct_offsets(shift_request_t **requests, cursor_shift_t **cursors)
 void write_offsets(shift_request_t **requests, corewar_t *corewar)
 {
     for (int i = 0; requests[i]; i++) {
+        if (requests[i]->offset == -1)
+            continue;
         corewar->bytes_tab[requests[i]->index] = requests[i]->offset;
     }
 }
