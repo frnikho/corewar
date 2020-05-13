@@ -34,24 +34,11 @@ int main(int argc, char **argv)
     corewar.cursor_shifts[0] = NULL;
     corewar.fd_file = open("result.cor", O_RDWR | O_CREAT | O_TRUNC, 0666);
     
-    push_request(&corewar, 8, 12, "salut");
-    push_request(&corewar, 0, 3, "quinze");
-
-    push_cursor(&corewar, 0, "saluzzzt");
-    push_cursor(&corewar, 14, "live");
-
     code = parser(&corewar);
     if (code == -1)
         return (84);
-    //for (int i = 0; i < corewar.bytes_nb; i++)
-    //    write(corewar.fd_file, &corewar.bytes_tab[i], 1);
-    
     construct_offsets(corewar.shift_requests, corewar.cursor_shifts);
-    for (int i = 0; corewar.shift_requests[i]; i++)
-        printf("%s %i %i %i\n", corewar.shift_requests[i]->name, corewar.shift_requests[i]->index, corewar.shift_requests[i]->count_from, corewar.shift_requests[i]->offset);
-    
     write_offsets(corewar.shift_requests, &corewar);
-    
     for (int i = 0; i < corewar.bytes_nb; i++)
         write(corewar.fd_file, &corewar.bytes_tab[i], 1);
 }

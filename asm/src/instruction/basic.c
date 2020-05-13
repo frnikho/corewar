@@ -27,7 +27,7 @@ int sti(char *line, corewar_t *corewar)
 {
     char **array = str_split(&line[corewar->instr_begin] + 4, ',');
     char instruction = 11;
-    char coding_byte =  get_coding_byte(array);
+    char coding_byte = get_coding_byte(array);
     shift_request_t tmp = {NULL, 0, corewar->bytes_nb, 0};
 
     write_little_endian(instruction, 1, corewar);
@@ -48,7 +48,7 @@ int and(char *line, corewar_t *corewar)
 {
     char **array = str_split(&line[corewar->instr_begin] + 4, ',');
     char instruction = 6;
-    char coding_byte =  get_coding_byte(array);
+    char coding_byte = get_coding_byte(array);
 
     write_little_endian(instruction, 1, corewar);
     write_little_endian(coding_byte, 1, corewar);
