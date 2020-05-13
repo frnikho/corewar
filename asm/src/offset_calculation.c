@@ -83,9 +83,13 @@ void construct_offsets(shift_request_t **requests, cursor_shift_t **cursors)
 
 void write_offsets(shift_request_t **requests, corewar_t *corewar)
 {
+    int *tab = NULL;
+
     for (int i = 0; requests[i]; i++) {
         if (requests[i]->offset == -1)
             continue;
-        corewar->bytes_tab[requests[i]->index] = requests[i]->offset;
+        tab = create_little_endian_tab(requests[i]->offset, 2);
+        for (int y = 0; y < 2; y++)
+            corewar->bytes_tab[requests[i]->index+y] = tab[y];
     }
 }

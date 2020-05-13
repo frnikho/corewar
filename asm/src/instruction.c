@@ -99,5 +99,5 @@ int write_params(corewar_t *corewar, int nbr, params params, int is_index)
         size = 2;
     if (!is_index && params == DIRECT)
         size = 4;
-    write_little_endian(corewar->fd_file, nbr, size, corewar);
+    write_little_endian(nbr, size, corewar);
 }

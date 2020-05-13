@@ -20,7 +20,8 @@ int parser(corewar_t *corewar);
 
 int open_file(char *content);
 char *read_file(int fd, char *fp);
-void write_little_endian(int fd, int nb, int bytes_nb, corewar_t *corewar);
+void write_little_endian(int nb, int bytes_nb, corewar_t *corewar);
+int *create_little_endian_tab(int nb, int bytes_nb);
 
 bool str_begin(const char *str, char const *begin);
 bool str_begin_char(const char *str, char c);
