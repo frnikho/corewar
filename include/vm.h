@@ -16,6 +16,17 @@
 #define EXIT_ERROR 84
 #define EXIT_NORMAL 0
 
+#define null 0
+
+typedef enum {false, true } bool;
+typedef enum {REGISTER = 1, DIRECT = 2, INDIRECT = 3} params;
+
+typedef struct instruction_s {
+    int instruction_code;
+    int *coding_byte;
+    params *parameters;
+} instruction_t;
+
 typedef struct carry_s {
     int flag;
 } carry_t;
@@ -35,21 +46,21 @@ typedef struct vm_s {
     carry_t carry;
     int *bytes_tab;
     int bytes_nb;
+    instruction_t **instructions;
 } vm_t;
 
+int open_file(char *content);
 void init_vm(char *filepath, vm_t *vm);
 void init_register(vm_t *vm);
 int loop(vm_t *vm);
 
+void push_byte_vm(vm_t *vm, int byte);
 int get_nb_from_bytes(int *bytes, int bytes_nb);
 int get_nb_from_tab_index(int *tab, int index, int bytes_nb);
 int *byte_to_binary(int byte);
+params *get_params_from_binary(int *binary);
 
-void push_byte_vm(vm_t *vm, int byte);
-//void pop_byte(vm_t *vm);
-//void del_byte(vm_t *vm, int index);
-//void replace_byte(vm_t *vm, int index, int new_byte);
-//void add_byte(vm_t *vm, int index, int byte);
-//void add_byte_core(vm_t *vm, int pre_nb, int *next_tab, int *values);
+void create_instructions_structs(vm_t *vm);
+
 
 #endif

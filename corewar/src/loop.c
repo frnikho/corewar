@@ -5,7 +5,6 @@
 ** loop function
 */
 
-#include "corewar.h"
 #include "vm.h"
 
 int loop(vm_t *vm)

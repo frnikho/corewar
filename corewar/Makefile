@@ -3,6 +3,7 @@ CC						=				gcc
 NAME					=				corewar
 SRC						=				src/main.c								\
 										src/register.c							\
+										src/construct_instruction_struct.c		\
 										src/bytes_tab_tools.c					\
 										src/conversion.c						\
 										src/vm.c								\

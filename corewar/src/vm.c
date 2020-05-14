@@ -6,7 +6,6 @@
 */
 
 #include <zconf.h>
-#include "corewar.h"
 #include "vm.h"
 #include <stdlib.h>
 
@@ -30,6 +29,9 @@ void init_vm(char *filepath, vm_t *vm)
     vm->pc.count = 0;
     vm->bytes_nb = 0;
     vm->bytes_tab = malloc(sizeof(int));
+    vm->instructions = malloc(sizeof(instruction_t *));
+    vm->instructions[0] = NULL;
     init_register(vm);
     load_cor_file(vm, filepath);
+    create_instructions_structs(vm);
 }
