@@ -16,7 +16,11 @@ int main(int argc, char **argv)
     if (argc < 2)
         return (EXIT_ERROR);
     init_vm(argv[1], &vm);
-    printf("OE: %i\n", get_nb_from_tab_index(vm.bytes_tab, 4, 1));
+    int *res = byte_to_binary(104);
+    for (int i = 0 ; i < 8; i++)
+        printf("%i ", res[i]);
+    printf("\n");
+    //printf("OE: %i\n", get_nb_from_tab_index(vm.bytes_tab, 4, 1));
     if (vm.carry.flag == ERROR_CODE)
         return (EXIT_ERROR);
     //id = loop(&vm);

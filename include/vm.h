@@ -43,6 +43,7 @@ int loop(vm_t *vm);
 
 int get_nb_from_bytes(int *bytes, int bytes_nb);
 int get_nb_from_tab_index(int *tab, int index, int bytes_nb);
+int *byte_to_binary(int byte);
 
 void push_byte_vm(vm_t *vm, int byte);
 //void pop_byte(vm_t *vm);

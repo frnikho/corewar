@@ -55,3 +55,21 @@ int get_nb_from_tab_index(int *tab, int index, int bytes_nb)
     free(buffer);
     return (result);
 }
+
+int *byte_to_binary(int byte)
+{
+    int *result = malloc(sizeof(int) * 8);
+    int index = 7;
+
+    for (int i = 0 ; i < 8; i++)
+        result[i] = 0;
+    if (byte > 255)
+        return (result);
+    while (byte >= 2 && index >= 0) {
+        result[index] = byte % 2;
+        byte /= 2;
+        index--;
+    }
+    result[index] = byte;
+    return (result);
+}
