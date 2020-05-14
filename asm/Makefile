@@ -3,6 +3,8 @@ CC						=				gcc
 NAME					=				asm
 SRC						=				src/main.c								\
 										src/endian_handling.c					\
+										src/bytes_tab_tools.c					\
+										src/offset_calculation.c				\
 										src/headers.c							\
 										src/get_params_values.c					\
 										src/instruction.c						\
@@ -16,7 +18,7 @@ SRC						=				src/main.c								\
 OBJ                     =       		$(SRC:%.c=%.o)
 
 INCLUDE         		= 		      	-I ../include/
-CFLAGS         			=       		$(INCLUDE) $(LIB) -g -L ../lib -lmy
+CFLAGS         			=       		$(INCLUDE) $(LIB) -L ../lib -lmy
 
 all:                    $(NAME)
 $(NAME):                $(OBJ)
@@ -31,3 +33,6 @@ fclean:                 clean
 re:                     fclean all
 test_run:
 						$(MAKE) -C tests
+
+debug:			$(CFLAGS)+=-g
+debug:			re

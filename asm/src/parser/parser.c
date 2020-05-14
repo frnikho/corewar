@@ -6,17 +6,38 @@
 */
 
 #include <zconf.h>
+#include <stdlib.h>
 #include "corewar.h"
 #include "my.h"
+
+char *get_cursor(char *line)
+{
+    char *result = my_strdup(line);
+
+    for (int i = 0; result[i]; i++) {
+        if (result[i] == ' ') {
+            free(result);
+            return (NULL);
+        }
+        if (result[i] == ':') {
+            result[i] = '\0';
+            break;
+        }
+    }
+    return (result);
+}
 
 int check_instruction(corewar_t *corewar, char *line)
 {
     bool found = false;
     op_t instruction = {0};
+    char *name = NULL;
 
     for (int i = 0; line[i] != 0 && !found; i++) {
         if (line[i] == ' ')
             continue;
+        if ((name = get_cursor(line)) != NULL)
+            push_cursor(corewar, corewar->bytes_nb-1, name);
         instruction = get_instruction(&line[i]);
         if (instruction.mnemonique != 0) {
             corewar->instr_begin = i;

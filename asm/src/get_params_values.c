@@ -19,8 +19,25 @@ int get_param_value(char *param)
         return (my_getnbr(param));
     if (param_type == DIRECT) {
         for (i = 0; param[i] != '%'; i++);
+        if (param[i+1] == ':')
+            return (0);
         param = &param[i+1];
         return (my_getnbr(param));
     }
     return (-1);
+}
+
+char *detect_shift_request(char *str)
+{
+    int res = -1;
+
+    for (int i = 0; str[i+1]; i++) {
+        if (str[i] == '%' && str[i+1] == ':') {
+            res = i+2;
+            break;
+        }
+    }
+    if (res == -1)
+        return (NULL);
+    return (&str[res]);
 }

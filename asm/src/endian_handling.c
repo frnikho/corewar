@@ -5,6 +5,7 @@
 ** endian_handling.c
 */
 
+#include "corewar.h"
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -22,7 +23,7 @@ int get_biggest_power(int nb, int base)
     return (result-1);
 }
 
-static int calc_and_print(int nb, int fd, int *tab, int reset)
+static int calc_and_print(int nb, int *tab, int reset)
 {
     static int bytes = 0;
     int digit = (nb/256);
@@ -35,16 +36,16 @@ static int calc_and_print(int nb, int fd, int *tab, int reset)
         return (bytes);
     }
     if (digit >= 256)
-        calc_and_print(digit, fd, tab, 0);
+        calc_and_print(digit, tab, 0);
     else {
         tab[bytes] = digit;
         bytes ++;
     }
-    calc_and_print(nb - (digit * 256), fd, tab, 0);
+    calc_and_print(nb - (digit * 256), tab, 0);
     return (bytes);
 }
 
-void write_little_endian(int fd, int nb, int bytes_nb)
+void write_little_endian(int nb, int bytes_nb, corewar_t *corewar)
 {
     int zero = 0;
     int *tab = malloc(sizeof(int) * bytes_nb);
@@ -52,18 +53,55 @@ void write_little_endian(int fd, int nb, int bytes_nb)
 
     if (nb < 0) {
         nb = (nb * -1) - 1;
-        calc_and_print(nb, fd, tab, 1);
+        calc_and_print(nb, tab, 1);
         for (int i = 0; i < bytes_nb; i++)
             tab[i] = 255 - tab[i];
         zero = 255;
         bytes = get_biggest_power(nb, 256)+1;
     } else {
-        calc_and_print(nb, fd, tab, 1);
+        calc_and_print(nb, tab, 1);
         bytes = get_biggest_power(nb, 256)+1;
     }
     for (int i = bytes; i < bytes_nb; i++)
-        write(fd, &zero, 1);
+        push_byte(corewar, zero);
     for (int i = 0; i < bytes; i++)
-        write(fd, &tab[i], 1);
+        push_byte(corewar, tab[i]);
     free(tab);
+}
+
+static void create_result_tab(int *tab_result, int *tab, int *values)
+{
+    int index = 0;
+
+    for (int i = values[0]; i < values[1]; i++) {
+        tab_result[index] = values[2];
+        index ++;
+    }
+    for (int i = 0; i < values[0]; i++) {
+        tab_result[index] = tab[i];
+        index++;
+    }
+    free(tab);
+}
+
+int *create_little_endian_tab(int nb, int bytes_nb)
+{
+    int zero = 0;
+    int *tab = malloc(sizeof(int) * bytes_nb);
+    int *result = malloc(sizeof(int) * bytes_nb);
+    int bytes = 0;
+
+    if (nb < 0) {
+        nb = (nb * -1) - 1;
+        calc_and_print(nb, tab, 1);
+        for (int i = 0; i < bytes_nb; i++)
+            tab[i] = 255 - tab[i];
+        zero = 255;
+        bytes = get_biggest_power(nb, 256)+1;
+    } else {
+        calc_and_print(nb, tab, 1);
+        bytes = get_biggest_power(nb, 256)+1;
+    }
+    create_result_tab(result, tab, (int []){bytes, bytes_nb, zero});
+    return (result);
 }

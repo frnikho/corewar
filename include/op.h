@@ -34,6 +34,20 @@ typedef char args_type_t;
 
 #define COREWAR_EXEC_MAGIC 0xea83f3
 
+typedef struct shift_request_s
+{
+    char *name;
+    int index;
+    int count_from;
+    int offset;
+} shift_request_t;
+
+typedef struct cursor_shift_s
+{
+    char *name;
+    int position;
+} cursor_shift_t;
+
 typedef struct header_s
 {
     int magic;
@@ -50,6 +64,10 @@ typedef struct corewar_s {
     int cursor;
     header_t header;
     int header_count;
+    int *bytes_tab;
+    int bytes_nb;
+    shift_request_t **shift_requests;
+    cursor_shift_t **cursor_shifts;
 } corewar_t;
 
 typedef struct op_s
