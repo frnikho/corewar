@@ -1,0 +1,8 @@
+**/*.o
+**/*.asm
+asm/asm
+CMakeLists.txt
+cmake-build-debug
+.idea/
+lib/libmy.a
+.vscode
