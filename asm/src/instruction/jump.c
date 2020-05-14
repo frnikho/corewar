@@ -8,11 +8,6 @@
 #include <my.h>
 #include "corewar.h"
 
-int jump(char *line, corewar_t *corewar)
-{
-
-}
-
 int zjmp(char *line, corewar_t *corewar)
 {
     char **array = str_split(&line[corewar->instr_begin] + 3, ',');
