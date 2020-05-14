@@ -1,5 +1,6 @@
 **/*.o
 **/*.asm
+**/*.cor
 asm/asm
 CMakeLists.txt
 cmake-build-debug

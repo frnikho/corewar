@@ -19,14 +19,14 @@ int power(int nb, int power)
         return (1);
     for (int i = 0; i < power; i++)
         result *= nb;
-    return (result);    
+    return (result);
 }
 
 int get_nb_from_bytes(int *bytes, int bytes_nb)
 {
     int result = 0;
     int sign_cap[] = {127, 32767, 8388607, 2147483647};
-    
+
     if (bytes_nb > 4 || bytes_nb < 1)
         return (0);
     for (int i = 0; i < bytes_nb - 1; i++)
