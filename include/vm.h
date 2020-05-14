@@ -33,11 +33,22 @@ typedef struct vm_s {
     reg_t *registers;
     pc_t pc;
     carry_t carry;
-    char *content;
+    int *bytes_tab;
+    int bytes_nb;
 } vm_t;
 
-vm_t init_vm(char *filepath);
+void init_vm(char *filepath, vm_t *vm);
 void init_register(vm_t *vm);
 int loop(vm_t *vm);
+
+int get_nb_from_bytes(int *bytes, int bytes_nb);
+int get_nb_from_tab_index(int *tab, int index, int bytes_nb);
+
+void push_byte_vm(vm_t *vm, int byte);
+//void pop_byte(vm_t *vm);
+//void del_byte(vm_t *vm, int index);
+//void replace_byte(vm_t *vm, int index, int new_byte);
+//void add_byte(vm_t *vm, int index, int byte);
+//void add_byte_core(vm_t *vm, int pre_nb, int *next_tab, int *values);
 
 #endif

@@ -62,7 +62,7 @@ int parse_line(corewar_t *corewar, char *line)
             write_comment(corewar, line);
         }
         if (corewar->header_count == 2) {
-            write(corewar->fd_file, &corewar->header, sizeof(corewar->header));
+            //write(corewar->fd_file, &corewar->header, sizeof(corewar->header));
             corewar->header_count++;
         }
         return (0);
