@@ -17,6 +17,9 @@ typedef enum {false, true } bool;
 typedef enum {REGISTER = 1, DIRECT = 2, INDIRECT = 3} params;
 
 int parser(corewar_t *corewar);
+void get_core_name(char **result, char *path, int *index, char *mark);
+char *get_output_name(char *path);
+int init_corewar_struct(corewar_t *corewar, char *path);
 
 int open_file(char *content);
 char *read_file(int fd, char *fp);

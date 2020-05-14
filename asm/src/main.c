@@ -14,26 +14,12 @@
 
 int main(int argc, char **argv)
 {
-    int fd = null;
     int code = null;
-    char *content = null;
     corewar_t corewar;
 
     if (argc != 2)
         return (84);
-    corewar.fd_file = open_file(argv[1]);
-    corewar.content = read_file(corewar.fd_file, argv[1]);
-    corewar.header_count = 0;
-    corewar.header.magic = COREWAR_EXEC_MAGIC;
-    corewar.header.prog_size = 23;
-    corewar.bytes_nb = 0;
-    corewar.bytes_tab = malloc(sizeof(int));
-    corewar.shift_requests = malloc(sizeof(shift_request_t*));
-    corewar.shift_requests[0] = NULL;
-    corewar.cursor_shifts = malloc(sizeof(cursor_shift_t*));
-    corewar.cursor_shifts[0] = NULL;
-    corewar.fd_file = open("result.cor", O_RDWR | O_CREAT | O_TRUNC, 0666);
-    
+    init_corewar_struct(&corewar, argv[1]);
     code = parser(&corewar);
     if (code == -1)
         return (84);
