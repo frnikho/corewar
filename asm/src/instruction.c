@@ -47,7 +47,7 @@ params get_params(char *params)
             continue;
         if (params[i] == '%')
             return (DIRECT);
-        if (my_str_isalpha(&params[i]))
+        if (my_str_isalpha(&params[i]) || my_isnum(params[i]))
             return (INDIRECT);
         return (REGISTER);
     }
@@ -79,6 +79,8 @@ char get_coding_byte(char **argv)
 
 int get_register_number(char *line)
 {
+    if (!line)
+        return (0);
     bool found = false;
     int nbr = 0;
     for (int i = 0; line[i]; i++) {

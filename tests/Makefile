@@ -13,7 +13,9 @@ SRC						=				../asm/src/endian_handling.c					\
 										../asm/src/parser/parser.c						\
 										../asm/utils/read_file.c						\
 										../asm/utils/str_begin.c						\
-										src/test_write_little_endian.c
+										src/test_get_coding_byte.c						\
+										src/test_get_register.c							\
+										src/test_get_params.c							\
 
 OBJ                     =       		$(SRC:%.c=%.o)
 
