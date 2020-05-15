@@ -13,7 +13,7 @@
 #include "op.h"
 
 const op_t op_tab[] = {
-    {"live", 1, 1,  NULL},
+    {"live", 1, 1, NULL},
     {"ld", 2, 2, NULL},
     {"add", 3, 4, NULL},
     {"sub", 3, 5, NULL},
@@ -43,8 +43,6 @@ int get_instruction(int byte_code)
 
 int count_next_instruction_jump(params *tab)
 {
-    // Count next number of bytes to jump to the next instruction
-    // by using the prameters type
     return (0);
 }
 
@@ -75,9 +73,8 @@ instruction_t *construct_instruction(vm_t *vm, int ins_indx, int byte_indx)
         ins->coding_byte = byte_to_binary(0);
         ins->parameters = malloc(sizeof(params) * 4);
         for (int i = 0; i < 4; i++)
-            ins->parameters[i] = 0;  
+            ins->parameters[i] = 0;
     }
-    printf("Instruction %i    %i %i %i\n", ins->instruction_code, ins->parameters[0], ins->parameters[1], ins->parameters[2]);
     return (ins);
 }
 

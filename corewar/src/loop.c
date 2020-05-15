@@ -13,7 +13,7 @@ int loop(vm_t *vm)
 
     if (vm->carry.flag == ERROR_CODE)
         return -1;
-    while (is_alive) {
+    while (is_alive && 0) {
 
     }
 }

@@ -19,7 +19,7 @@ int main(int argc, char **argv)
     get_args(&vm, argc, argv);
     if (vm.carry.flag == ERROR_CODE)
         return (EXIT_ERROR);
-    //id = loop(&vm);
+    id = loop(&vm);
     if (id == -1)
         return (EXIT_ERROR);
 }

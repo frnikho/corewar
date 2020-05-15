@@ -61,7 +61,7 @@ int *byte_to_binary(int byte)
     int *result = malloc(sizeof(int) * 8);
     int index = 7;
 
-    for (int i = 0 ; i < 8; i++)
+    for (int i = 0; i < 8; i++)
         result[i] = 0;
     if (byte > 255)
         return (result);
