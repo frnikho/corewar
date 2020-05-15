@@ -5,18 +5,27 @@
 ** cat two string together
 */
 
+#include <stdlib.h>
+
 int my_strlen(char const *str);
 void my_putchar(char c);
 void my_put_nbr(int nb);
 
 char *my_strcat(char *dest, char const *src)
 {
-    int length_dest = my_strlen(dest);
-    int length_src = my_strlen(src);
+    int size = 0;
+    int y = 0;
 
-    for (int i = 0; src[i] != '\0'; i++) {
-        dest[length_dest + i]=src[i];
+    char *result =
+    malloc(sizeof(char) * (my_strlen(dest) + my_strlen(src) + 1));
+
+    for (int i = 0; dest[i] != '\0'; i++) {
+        result[i] = dest[i];
+        size++;
     }
-    dest[length_dest + length_src] = '\0';
-    return (dest);
+    for (y = 0; src[y] != '\0'; y++) {
+        result[size + y] = src[y];
+    }
+    result[size + y] = '\0';
+    return (result);
 }

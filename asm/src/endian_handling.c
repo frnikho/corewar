@@ -105,3 +105,57 @@ int *create_little_endian_tab(int nb, int bytes_nb)
     create_result_tab(result, tab, (int []){bytes, bytes_nb, zero});
     return (result);
 }
+
+void write_little_endian_fd(int fd, int nb, int bytes_nb, corewar_t *corewar)
+{
+    int zero = 0;
+    int *tab = malloc(sizeof(int) * bytes_nb);
+    int bytes = 0;
+
+    if (nb < 0) {
+        nb = (nb * -1) - 1;
+        calc_and_print(nb, tab, 1);
+        for (int i = 0; i < bytes_nb; i++)
+            tab[i] = 255 - tab[i];
+        zero = 255;
+        bytes = get_biggest_power(nb, 256)+1;
+    } else {
+        calc_and_print(nb, tab, 1);
+        bytes = get_biggest_power(nb, 256)+1;
+    }
+    for (int i = bytes; i < bytes_nb; i++)
+        write(fd, &zero, 1);
+    for (int i = 0; i < bytes; i++)
+        write(fd, &tab[i], 1);
+    free(tab);
+}
+
+int power(int nb, int power)
+{
+    int result = 1;
+
+    if (power == 0)
+        return (1);
+    for (int i = 0; i < power; i++)
+        result *= nb;
+    return (result);
+}
+
+int get_nb_from_bytes(int *bytes, int bytes_nb)
+{
+    int result = 0;
+    int sign_cap[] = {127, 32767, 8388607, 2147483647};
+
+    if (bytes_nb > 4 || bytes_nb < 1)
+        return (0);
+    for (int i = 0; i < bytes_nb - 1; i++)
+        result += bytes[i] * power(256, bytes_nb - i - 1);
+    result += bytes[bytes_nb-1];
+    if (result > sign_cap[bytes_nb-1]) {
+        for (int i = 0; i < bytes_nb; i++)
+            bytes[i] = bytes[i] - 255;
+        bytes[bytes_nb-1] -= 1;
+        return (get_nb_from_bytes(bytes, bytes_nb));
+    }
+    return (result);
+}

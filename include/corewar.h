@@ -17,11 +17,16 @@ typedef enum {false, true } bool;
 typedef enum {REGISTER = 1, DIRECT = 2, INDIRECT = 3} params;
 
 int parser(corewar_t *corewar);
+void get_core_name(char **result, char *path, int *index, char *mark);
+char *get_output_name(char *path);
+int init_corewar_struct(corewar_t *corewar, char *path);
 
 int open_file(char *content);
 char *read_file(int fd, char *fp);
 void write_little_endian(int nb, int bytes_nb, corewar_t *corewar);
 int *create_little_endian_tab(int nb, int bytes_nb);
+void write_little_endian_fd(int fd, int nb, int bytes_nb, corewar_t *corewar);
+int get_nb_from_bytes(int *bytes, int bytes_nb);
 
 bool str_begin(const char *str, char const *begin);
 bool str_begin_char(const char *str, char c);

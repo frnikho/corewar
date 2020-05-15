@@ -6,6 +6,7 @@
 */
 
 #include "vm.h"
+#include <stdio.h>
 
 int main(int argc, char **argv)
 {
@@ -14,10 +15,11 @@ int main(int argc, char **argv)
 
     if (argc < 2)
         return (EXIT_ERROR);
-    vm = init_vm(argv[1]);
+    init_vm(argv[1], &vm, argc);
+    get_args(&vm, argc, argv);
     if (vm.carry.flag == ERROR_CODE)
         return (EXIT_ERROR);
-    id = loop(&vm);
+    //id = loop(&vm);
     if (id == -1)
         return (EXIT_ERROR);
 }

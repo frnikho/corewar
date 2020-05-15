@@ -5,7 +5,6 @@
 ** loop function
 */
 
-#include "corewar.h"
 #include "vm.h"
 
 int loop(vm_t *vm)
@@ -15,6 +14,6 @@ int loop(vm_t *vm)
     if (vm->carry.flag == ERROR_CODE)
         return -1;
     while (is_alive) {
-        
+
     }
 }
