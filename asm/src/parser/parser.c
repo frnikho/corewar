@@ -49,11 +49,32 @@ int check_instruction(corewar_t *corewar, char *line)
     }
 }
 
+void write_header(corewar_t *corewar)
+{
+    int *tab = NULL;
+    int pre_magic = 0;
+    int pre_size = 0;
+
+    tab = create_little_endian_tab(corewar->header.magic, 4);
+    pre_magic = corewar->header.magic;
+    corewar->header.magic = get_nb_from_bytes((int []){tab[3], \
+        tab[2], tab[1], tab[0]}, 4);
+    free(tab);
+    tab = create_little_endian_tab(corewar->header.prog_size, 4);
+    pre_size = corewar->header.prog_size;
+    corewar->header.prog_size = get_nb_from_bytes((int []){tab[3], \
+        tab[2], tab[1], tab[0]}, 4);
+    free(tab);
+    write(corewar->fd_file, &corewar->header, sizeof(corewar->header));
+    corewar->header.magic = pre_magic;
+    corewar->header.prog_size = pre_size;
+    corewar->header_count++;
+}
+
 int parse_line(corewar_t *corewar, char *line)
 {
     bool comment = str_begin_char(line, '#');
     bool info = str_begin_char(line, '.');
-    int *tab = NULL;
 
     if (info) {
         if (str_begin(line, ".name")) {
@@ -62,18 +83,8 @@ int parse_line(corewar_t *corewar, char *line)
         if (str_begin(line, ".comment")) {
             write_comment(corewar, line);
         }
-        if (corewar->header_count == 2) {
-            tab = create_little_endian_tab(corewar->header.magic, 4);
-            corewar->header.magic =  get_nb_from_bytes((int []){tab[3], \
-            tab[2], tab[1], tab[0]}, 4);
-            free(tab);
-            tab = create_little_endian_tab(corewar->header.prog_size, 4);
-            corewar->header.prog_size =  get_nb_from_bytes((int []){tab[3], \
-            tab[2], tab[1], tab[0]}, 4);
-            free(tab);
-            write(corewar->fd_file, &corewar->header, sizeof(corewar->header));
-            corewar->header_count++;
-        }
+        if (corewar->header_count == 2)
+            write_header(corewar);
         return (0);
     }
 

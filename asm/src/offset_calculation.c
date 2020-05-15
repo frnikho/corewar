@@ -74,13 +74,6 @@ int calc_request_offset(shift_request_t *request, cursor_shift_t **cursors)
     return (cursors[res]->position - request->count_from + 1);
 }
 
-void construct_offsets(shift_request_t **requests, cursor_shift_t **cursors)
-{
-    for (int i = 0; requests[i]; i++) {
-        requests[i]->offset = calc_request_offset(requests[i], cursors);
-    }
-}
-
 void write_offsets(shift_request_t **requests, corewar_t *corewar)
 {
     int *tab = NULL;

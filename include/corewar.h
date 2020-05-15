@@ -68,4 +68,6 @@ int calc_request_offset(shift_request_t *request, cursor_shift_t **cursors);
 void construct_offsets(shift_request_t **requests, cursor_shift_t **cursors);
 void write_offsets(shift_request_t **requests, corewar_t *corewar);
 
+int get_biggest_power(int nb, int base);
+
 #endif

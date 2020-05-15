@@ -3,6 +3,7 @@ CC						=				gcc
 NAME					=				asm
 SRC						=				src/main.c								\
 										src/endian_handling.c					\
+										src/endian_dependencies.c				\
 										src/init_corewar_struct.c				\
 										src/bytes_tab_tools.c					\
 										src/offset_calculation.c				\

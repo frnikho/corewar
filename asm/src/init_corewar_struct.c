@@ -63,5 +63,5 @@ int init_corewar_struct(corewar_t *corewar, char *path)
     corewar->cursor_shifts = malloc(sizeof(cursor_shift_t*));
     corewar->cursor_shifts[0] = NULL;
     corewar->fd_file = open(name, O_RDWR | O_CREAT | O_TRUNC, 0666);
-    free(name);   
+    free(name);
 }

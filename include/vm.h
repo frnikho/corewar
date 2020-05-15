@@ -48,7 +48,7 @@ typedef struct vm_s {
     int bytes_nb;
     int dump_cycle;
     char **prog_name;
-    int *prog_nbr;
+    char *prog_nbr;
     int *load_address;
     instruction_t **instructions;
 } vm_t;
@@ -65,6 +65,7 @@ int *byte_to_binary(int byte);
 params *get_params_from_binary(int *binary);
 
 void create_instructions_structs(vm_t *vm);
+int get_args(vm_t *vm, int argc, char **argv);
 
 
 #endif

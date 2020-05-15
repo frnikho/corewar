@@ -23,7 +23,7 @@ int st(char *line, corewar_t *corewar)
 {
     char **array = str_split(line, ' ');
     char instruction = 3;
-    char coding_byte =  get_coding_byte(array);
+    char coding_byte = get_coding_byte(array);
 
     write_little_endian(instruction, 1, corewar);
     write_little_endian(coding_byte, 1, corewar);
