@@ -2,6 +2,8 @@ CC						=				gcc
 
 NAME					=				unit_tests
 SRC						=				../asm/src/endian_handling.c					\
+										../asm/src/endian_dependencies.c				\
+										../asm/src/init_corewar_struct.c				\
 										../asm/src/bytes_tab_tools.c					\
 										../asm/src/offset_calculation.c					\
 										../asm/src/headers.c							\

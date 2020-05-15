@@ -14,3 +14,6 @@ re:                     fclean all
 debug:
 						$(MAKE) -C asm/ debug
 						$(MAKE) -C corewar/ debug
+test_run:
+						$(MAKE) -C tests
+						./tests/unit_tests
