@@ -48,6 +48,22 @@ typedef struct cursor_shift_s
     int position;
 } cursor_shift_t;
 
+typedef struct header_name_s
+{
+    //int magic;
+    char prog_name[PROG_NAME_LENGTH + 1];
+    //int prog_size;
+    //char comment[COMMENT_LENGTH + 1];
+} header_name_t;
+
+typedef struct header_com_s
+{
+    //int magic;
+    //char prog_name[PROG_NAME_LENGTH + 1];
+    //int prog_size;
+    char comment[COMMENT_LENGTH + 1];
+} header_com_t;
+
 typedef struct header_s
 {
     int magic;
