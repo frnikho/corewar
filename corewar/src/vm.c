@@ -23,7 +23,7 @@ void load_cor_file(vm_t *vm, char *fp)
     }
 }
 
-void init_vm(char *filepath, vm_t *vm)
+void init_vm(char *filepath, vm_t *vm, int argc)
 {
     vm->carry.flag = 0;
     vm->pc.count = 0;
@@ -31,6 +31,10 @@ void init_vm(char *filepath, vm_t *vm)
     vm->bytes_tab = malloc(sizeof(int));
     vm->instructions = malloc(sizeof(instruction_t *));
     vm->instructions[0] = NULL;
+    vm->dump_cycle = 0;
+    vm->prog_name = malloc(sizeof(char *) * argc);
+    vm->prog_nbr = malloc(sizeof(char *) * argc);
+    vm->load_address = malloc(sizeof(char *) * argc);
     init_register(vm);
     load_cor_file(vm, filepath);
     create_instructions_structs(vm);

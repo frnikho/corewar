@@ -46,11 +46,15 @@ typedef struct vm_s {
     carry_t carry;
     int *bytes_tab;
     int bytes_nb;
+    int dump_cycle;
+    char **prog_name;
+    int *prog_nbr;
+    int *load_address;
     instruction_t **instructions;
 } vm_t;
 
 int open_file(char *content);
-void init_vm(char *filepath, vm_t *vm);
+void init_vm(char *filepath, vm_t *vm, int argc);
 void init_register(vm_t *vm);
 int loop(vm_t *vm);
 

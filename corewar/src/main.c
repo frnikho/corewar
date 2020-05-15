@@ -15,7 +15,8 @@ int main(int argc, char **argv)
 
     if (argc < 2)
         return (EXIT_ERROR);
-    init_vm(argv[1], &vm);
+    init_vm(argv[1], &vm, argc);
+    get_args(&vm, argc, argv);
     if (vm.carry.flag == ERROR_CODE)
         return (EXIT_ERROR);
     //id = loop(&vm);
