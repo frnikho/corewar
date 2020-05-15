@@ -12,26 +12,25 @@
 #include <stdlib.h>
 #include "op.h"
 
-op_t op_tab[] =
-    {
-        {"live", 1, {T_DIR}, 1, 10, NULL},
-        {"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, NULL},
-        {"add", 3, {T_REG, T_REG, T_REG}, 4, 10, NULL},
-        {"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, NULL},
-        {"and", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 6, 6, NULL},
-        {"or", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 7, 6, 0},
-        {"xor", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 8, 6, 0},
-        {"zjmp", 1, {T_DIR}, 9, 20, NULL},
-        {"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25,0},
-        {"sti", 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 11, 25,NULL},
-        {"fork", 1, {T_DIR}, 12, 800, 0},
-        {"lld", 2, {T_DIR | T_IND, T_REG}, 13, 10, 0},
-        {"lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 14, 50,0},
-        {"lfork", 1, {T_DIR}, 15, 1000, 0},
-        {"aff", 1, {T_REG}, 16, 2, 0},
-        {"st", 2, {T_REG, T_IND | T_REG}, 3, 5, NULL},
-        {0, 0, {0}, 0, 0, 0}
-    };
+const op_t op_tab[] = {
+    {"live", 1, 1,  NULL},
+    {"ld", 2, 2, NULL},
+    {"add", 3, 4, NULL},
+    {"sub", 3, 5, NULL},
+    {"and", 3, 6, NULL},
+    {"or", 3, 7, 0},
+    {"xor", 3, 8, 0},
+    {"zjmp", 1, 9, NULL},
+    {"ldi", 3, 10, 0},
+    {"sti", 3, 11, NULL},
+    {"fork", 1, 12, 0},
+    {"lld", 2, 13, 0},
+    {"lldi", 3, 14, 0},
+    {"lfork", 1, 15, 0},
+    {"aff", 1, 16, 0},
+    {"st", 2, 3, NULL},
+    {0, 0, 0, 0}
+};
 
 int get_instruction(int byte_code)
 {
