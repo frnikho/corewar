@@ -8,26 +8,25 @@
 #include <my.h>
 #include "corewar.h"
 
-op_t op_tab[] =
-    {
-        {"live", 1, {T_DIR}, 1, 10, live},
-        {"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, ld},
-        {"add", 3, {T_REG, T_REG, T_REG}, 4, 10, add},
-        {"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, sub},
-        {"and", 3, {T_REG | T_DIR | T_IND, T_REG | T_IND | T_DIR, T_REG}, 6, 6, and},
-        {"or", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 7, 6, 0},
-        {"xor", 3, {T_REG | T_IND | T_DIR, T_REG | T_IND | T_DIR, T_REG}, 8, 6, 0},
-        {"zjmp", 1, {T_DIR}, 9, 20, zjmp},
-        {"ldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 10, 25,0},
-        {"sti", 3, {T_REG, T_REG | T_DIR | T_IND, T_DIR | T_REG}, 11, 25,sti},
-        {"fork", 1, {T_DIR}, 12, 800, 0},
-        {"lld", 2, {T_DIR | T_IND, T_REG}, 13, 10, 0},
-        {"lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 14, 50,0},
-        {"lfork", 1, {T_DIR}, 15, 1000, 0},
-        {"aff", 1, {T_REG}, 16, 2, 0},
-        {"st", 2, {T_REG, T_IND | T_REG}, 3, 5, st},
-        {0, 0, {0}, 0, 0, 0}
-    };
+const op_t op_tab[] = {
+    {"live", 0, 0, live},
+    {"ld", 0, 0, ld},
+    {"add", 0, 0, add},
+    {"sub", 0, 0, sub},
+    {"and", 0, 0, and},
+    {"or", 0, 0, 0},
+    {"xor", 0, 0, 0},
+    {"zjmp", 0, 0, zjmp},
+    {"ldi", 0, 0, 0},
+    {"sti", 0, 0, sti},
+    {"fork", 0, 0, 0},
+    {"lld", 0, 0, 0},
+    {"lldi", 0, 0, 0},
+    {"lfork", 0, 0, 0},
+    {"aff", 0, 0, 0},
+    {"st", 0, 0, st},
+    {0, 0, 0, 0}
+};
 
 op_t get_instruction(char *name)
 {

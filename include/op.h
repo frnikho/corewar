@@ -90,9 +90,7 @@ typedef struct op_s
 {
     char *mnemonique;
     char nbr_args;
-    args_type_t type[MAX_ARGS_NUMBER];
     char code;
-    int nbr_cycles;
     int (*callback)(char *line, corewar_t *corewar);
 } op_t;
 
@@ -100,7 +98,7 @@ typedef struct op_s
 #define DIR_SIZE 4
 #define REG_SIZE DIR_SIZE
 
-extern op_t op_tab[];
+extern const op_t op_tab[];
 
 #define CYCLE_TO_DIE 1536
 #define CYCLE_DELTA 5
