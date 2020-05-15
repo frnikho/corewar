@@ -20,7 +20,7 @@ int get_args(vm_t *vm, int argc, char **argv)
         if (my_strcmp(argv[i], "-n") == 0)
             vm->prog_nbr = argv[i + 1];
         else if (my_strcmp(argv[i], "-a") == 0) {
-            vm->load_address[i] = my_get_nbr(argv[i + 1]);
+            vm->load_address[i] = my_getnbr(argv[i + 1]);
         } else {
             vm->prog_name[i] = argv[i];
         }

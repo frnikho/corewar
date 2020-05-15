@@ -9,3 +9,5 @@ lib/libmy.a
 .vscode
 vgcore.*
 content
+tests/unit_tests
+corewar/corewar
